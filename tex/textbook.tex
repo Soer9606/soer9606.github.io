@@ -1,0 +1,62 @@
+\documentclass{book}
+\usepackage{mystyle}
+\usepackage{subfiles}
+
+% Bibliography
+\usepackage[backend=biber,style=authoryear]{biblatex}
+\addbibresource{bibliography.bib}
+
+% Paths to help subfile
+\makeatletter
+\providecommand*{\input@path}{}
+\g@addto@macro\input@path{{./text//}{./text/MeasureTheory//}{./MeasureTheory//}}
+\makeatother
+
+
+
+
+
+
+% Document starts
+\begin{document}
+\frontmatter
+% Title
+\subfile{text/title}
+
+% Table of Contents, Figures and Tables
+\tableofcontents
+\listoffigures
+%\listoftables
+
+% Preface
+\subfile{preface}
+
+
+
+
+
+
+
+
+% Body of the text
+\mainmatter
+\subfile{measureTheoryMain}
+
+
+% \appendix
+
+
+
+
+
+
+
+\backmatter
+% Index
+\printindex
+
+% Bibliography
+\printbibliography
+
+
+\end{document}

@@ -1,0 +1,54 @@
+\ProvidesPackage{mystyle}
+
+\usepackage{makeidx}
+\makeindex
+
+% UTF-8
+\usepackage[utf8]{inputenc}
+
+% Math packages
+\usepackage{amsthm, amsmath, amssymb, mathtools}
+
+% References. \cref should be used for every reference
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\crefname{equation}{}{}
+
+
+% Theorem environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\renewenvironment{proof}{{\bfseries Proof.}}{\qed}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+% Mathematical symbols
+\newcommand{\N}{\mathbb{N}} % Natural numbers
+\newcommand{\Z}{\mathbb{Z}} % Integers
+\newcommand{\Q}{\mathbb{Q}} % Rationals
+\newcommand{\R}{\mathbb{R}} % Reals
+\newcommand{\C}{\mathbb{C}} % Complex numbers
+\newcommand{\K}{\mathbb{K}} % Used to denote either \R or \C
+\newcommand{\sa}[1]{\mathcal{#1}} % Sigma-algebras
+\newcommand{\topo}[1]{\mathcal{#1}} % Topologies
+\newcommand{\card}[1]{\left|#1\right|} % Cardinality
+\newcommand{\pow}[1]{\mathcal{P}(#1)} % the power set
+\newcommand{\norm}[2][]{\left\Vert #2 \right\Vert_{#1}} % Norms
+\numberwithin{equation}{section}
+
+% Header
+\usepackage{fancyhdr}				
+	\setlength{\headheight}{15.2pt}
+	\pagestyle{fancy}
+	\lhead{}
+	\chead{}
+	\rhead{}
+	\lfoot[]{\nouppercase{\leftmark}}
+	\cfoot{\thepage}
+	\rfoot[\nouppercase{\leftmark}]{}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0.4pt}

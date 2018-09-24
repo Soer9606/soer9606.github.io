@@ -1,0 +1,162 @@
+\documentclass[../../textbook.tex]{subfiles}
+\begin{document}
+
+\section{Introduction}
+Much of mathematics is based around taking an everyday notion, such as length, and then making it mathematically vigorous. Thus, mathematicians have taken the notion of length, defined what a length is (specifically what a length \emph{function} should be) and then studied it extensively. This has led to the study of what is called a metric, and all of the broad theory that follows.
+
+So let us now take another notion, or rather a family of related notions, namely: "size", "mass", "area", "volume" and perhaps even more. We are interested in boiling these notions down to their essence, and then beating it with a hammer, and see what tricks it can do. We are, to be precise, interested in defining two things. First we are interested in defining what things (here sets) can be measured; and second we are interested in defining a function which, when given such a set that can be measured, assigns to it a number which we will think of as its size (or in the language, its measure).
+
+This theory, which we will develop over the course of this section, is the theory of measures and $\sigma$-algebras (the so-called measurable sets).
+
+For further reading, consult \autocite{schilling2017measures}.
+
+\section{$\sigma$-algebras}
+
+Our first task is to define which sets that can be measured. In every day life, there are perhaps things that are to small, or have a much too irregular shape to be measured, and it is these problems we will try to avoid.
+
+It is a difficult task to say exactly which sets can be measured, but we can make a number of observations about the behaviour of sets that can be measured. First of all, we can measure "nothing", i.e. if there is nothing there to measure, we will think of it as having 0 measure (or size). Furthermore if we have a plank of wood, we would like to be able to measure its whole length, i.e. we would like our whole object of interest to be measurable.
+
+Moreover, since we can measure the whole length of the plank, then if we can measure some part of the plank, then we can intuitively measure the remaining part of the plank, since we could just subtract the length of the plank with the length of the part we had measured.
+
+Lastly if we can measure a lot of small non-intersecting parts of the plank of wood, we know that to measure all these small parts together, we can just add all the lengths of the small parts.
+
+It is these three observations that will be the basics of what we will call a $\sigma$-algebra.
+
+\begin{definition}
+Let $X$ be an arbitrary set. A $\sigma$-algebra\index{S@$\sigma$-algebra}, $\sa{A}$, on the set $X$, is a family of subsets of $X$ satisfying
+\begin{align*}
+    X &\in \sa{A}, \tag{$\Sigma_1$} \label{eq: sigma1}\\
+    A\in \sa{A} &\Rightarrow A^{c}\in \sa{A}, \tag{$\Sigma_2$} \label{eq: sigma2} \\
+    A_1, A_2, \dots \in \sa{A} &\Rightarrow \bigcup_{i\in \N}A_i \in \sa{A}. \tag{$\Sigma_3$} \label{eq: sigma3}
+\end{align*}
+We will call a set $A\subseteq X$ ($\sa{A}$-)measurable if $A\in \sa{A}$, and the tuple $(X, \sa{A})$ will be called a measurable space.
+\end{definition}
+
+\begin{proposition}
+Here are some introductory results about $\sigma$-algebras and their proofs.
+\begin{enumerate}
+    \item $\emptyset \in \sa{A}$.
+    \item $A,B\in \sa{A} \Rightarrow A\cup B \in \sa{A}$.
+    \item $A_1, A_2, \dots \in \sa{A} \Rightarrow \bigcap_{i\in \N}A_i\in \sa{A}$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+\item[\emph{1}.] Since $X\in \sa{A}$ by ($\Sigma_1$) and $\emptyset=X^c\in \sa{A}$ by ($\Sigma_2$).
+\item[\emph{2}.] Set $A_1=A, A_2=B, A_3=\emptyset, A_4=\emptyset, \dots$, then $A\cup B=\bigcup_{i\in \N}A_i\in \sa{A}$ by $(\Sigma_3)$.
+\item[\emph{3}.] If $A_i\in \sa{A}$ then $A_i^c\in \sa{A}$ by $(\Sigma_2)$, so $\bigcup_{i\in \N}A_i^c\in \sa{A}$ by $(\Sigma_3)$ and again by $(\Sigma_2)$ $\bigcap_{i\in \N}A_i=\left(\bigcup_{i\in \N}A_i^c\right)^c\in \sa{A}$.
+\end{enumerate}
+\end{proof}
+
+\begin{example}
+Here are some examples of $\sigma$-algebras.
+\begin{enumerate}
+\item The power-set $\pow{X}$ (the set of all subsets of $X$) is a $\sigma$-algebra on $X$ called the maximal $\sigma$-algebra on $X$.
+\item The set $\{\emptyset, X\}$ is a $\sigma$-algebra called the minimal $\sigma$-algebra on $X$.
+\item For a subset $A\subseteq X$ the family $\{\emptyset, A, A^c, X\}$ is a $\sigma$-algebra on $X$.
+\item $\{\emptyset, A, X\}$ is not a $\sigma$-algebra unless $A=\emptyset$ or $A=X$.
+\item $\sa{A}:=\{A \subseteq X : \card{A} \le \card{\N} \text{ or } \card{A^c} \le \card{\N} \}$ is a $\sigma$-algebra. Indeed:
+\begin{itemize}
+    \item[$(\Sigma_1):$] $\emptyset=X^c$ is obviously countable.
+    \item[$(\Sigma_2):$] If $A\in \sa{A}$ one of $A$ or $A^c$ is by definition countable, hence $A^c\in \sa{A}$.
+    \item[$(\Sigma_3):$] If $A_1, A_2, \dots \in \sa{A}$ then one of two cases can occur:
+\begin{itemize}
+    \item All of the $A_i$ are countable. Then $\bigcup_{i\in \N}A_i$ is a countable union of countable sets, which by %%%%%%%%%%%%%%%%%%%%% means that it is itself countable
+    \item At least one of the $A_{i_0}$ is uncountable. Then $A_{i_0}^c$ is countable, hence
+    \begin{align*} %%%%%%% Check this
+        \left( \bigcup_{i\in \N} A_i \right)^c = \bigcap_{i\in \N} A_i^c \subseteq A_{i_0}^c.
+    \end{align*}
+    Hence $\bigcup_{i\in \N} A_i\in \sa{A}$ since its inverse is countable. 
+\end{itemize}
+\end{itemize} %%%% More examples
+\item Let $(X, \sa{A})$ be a measurable space. For $E\subseteq X$, the family
+\begin{align*}
+    \sa{A}_E:=\{E\cap B : B\in \sa{A}\}
+\end{align*}
+is a $\sigma$-algebra called the trace $\sigma$-algebra of $E$ in $\sa{A}$. This produces the measurable space $(E, \sa{A}_E)$. Indeed:
+\begin{itemize}
+    \item[$(\Sigma_1):$] Since $X\in \sa{A}$, we have $E=E\cap X\in \sa{A}_E$.
+    \item[$(\Sigma_2):$] Let $A \in \sa{A}_E$, then by definition of the trace $\sigma$-algebra, there is an element $B\in \sa{A}$ such that $B\cap E=A$. By $(\Sigma_2)$ $B^c\in \sa{A}$ as well, so
+    \begin{align*}
+        E \setminus A &= E \setminus (B \cap E) \\
+        &= E \setminus B \\
+        &= E \cap B^c \in \sa{A}_E
+    \end{align*}
+    as wanted.
+    \item[$(\Sigma_3):$] If $A_1, A_2, \dots \in \sa{A}_E$, then by definition, there exist $B_1, B_2, \dots \in \sa{A}$ such that $A_i = E \cap B_i$. Then
+    \begin{align*}
+        \bigcup_{i\in \N} A_i = \bigcup_{i\in \N} (E \cap B_i) = E \cap \left( \bigcup_{i\in \N} B_i \right) \in \sa{A}
+    \end{align*}
+\end{itemize}
+\item Let $(Y, \sa{A}_Y)$ be a measurable space, and let $f:X \to Y$ be a mapping. Then
+\begin{align*}
+    \sigma(f) := \{ f^{-1}(A) : A\in \sa{A}_Y \}
+\end{align*}
+is a $\sigma$-algebra on $X$ called the $\sigma$-algebra generated by $f$. Show this.\index{$\sigma(f)$}
+\end{enumerate}
+\end{example}
+
+\begin{theorem}\label{thm: intersection of sigma-algebras is a sigma-algebra}
+Let $\{\sa{A}_1\}_{i\in I}$ be arbitrarily many $\sigma$-algebras on $X$. Then the intersection
+\begin{align*}
+    \sa{A}:=\bigcap_{i\in I} \sa{A}_i
+\end{align*}
+is again a $\sigma$-algebra on $X$.
+\end{theorem}
+\begin{proof}
+$(\Sigma_1)$: Since $X\in \sa{A}_i$ for all $i\in I$, $X\in \sa{A}$.
+
+$(\Sigma_2)$: If $A\in \sa{A}$, then $A\in \sa{A}_i$ for all $i\in I$, hence $A^c\in \sa{A}_i$ for all $i\in I$, and thus $A\in \sa{A}$.
+
+$(\Sigma_3)$: If $\{A_i\}_{i\in \N} \in \sa{A}$ then $\{A_i\}_{i\in \N}\in \sa{A}_i$ for all $i\in I$, hence $\bigcup_{\N}A_i\in \sa{A}_i$ for all $i\in I$, and thus $\bigcup_{\N}A_i\in \sa{A}$.
+\end{proof}
+
+An arbitrary family of subsets, $\sa{E}$ , of $X$ will in general not be a $\sigma$-algebra, but we are interested in finding the smallest such $\sigma$-algebra that contains it.
+
+\begin{proposition}
+For every family $\sa{G}\subseteq \pow{X}$ there exists a smallest (or: minimal, corsest) $\sigma$-algebra containing $\sa{G}$, namely the $\sigma$-algebra generated by $\sa{G}$ denoted by $\sigma(\sa{G})$, where $\sa{G}$ is called the generator. Furthermore,
+\begin{align*}
+    \sigma(\sa{G})=\bigcap_{\substack{\sa{C} \; \sigma-\text{alg.} \\ \sa{C} \supseteq \sa{G}}} \sa{C}.
+\end{align*}
+\end{proposition}
+\begin{proof}
+By \cref{thm: intersection of sigma-algebras is a sigma-algebra}
+\begin{align*}
+    \sa{A}:=\bigcap_{\substack{\sa{C} \; \sigma-\text{alg.} \\ \sa{C} \supseteq \sa{G}}} \sa{C}.
+\end{align*}
+defines a $\sigma$-algebra.\index{S@$\sigma(\sa{G})$}
+
+Since $\sa{G}\subseteq \pow{X}$ and $\pow{X}$ is a $\sigma$-algebra, the intersection is non-empty. Thus the definition of $\sa{A}$ is well-defined, and defines a $\sigma$-algebra containing $\sa{G}$. If $\sa{A}'$ is another $\sigma$-algebra containing $\sa{G}$, then $\sa{A}'$ is in the above intersection and thus $\sa{A}\subseteq \sa{A}'$. Thus $\sa{A}$ is the smallest $\sigma$-algebra containing $\sa{G}$, i.e. in notation $\sigma(\sa{G})=\sa{A}$.
+\end{proof}
+
+\begin{remark}
+The following are easily proved
+\begin{enumerate}
+    \item If $\sa{G}$ is itself a $\sigma$-algebra, then $\sa{G}=\sigma(\sa{G})$.
+    \item If $A\subseteq X$, we have $\sigma(A):=\sigma(\{A\})=\{\emptyset, A, A^c, X\}$.
+    \item If $\sa{F} \subseteq \sa{G} \subseteq A$, then $\sigma(\sa{F})\subseteq \sigma(\sa{G}) \subseteq \sigma(\sa{A})=\sa{A}$.
+\end{enumerate}
+\end{remark}
+
+Recall the definition of an open set $A\subseteq \R$:
+\begin{align*}
+    A\subseteq \R \text{ is open} \Leftrightarrow \forall x \in A, \exists r > 0: B(x, r) \subseteq A
+\end{align*}
+We denote the collection of all open sets of $\R$ by $\topo{O}$. This collection is called a topology. A topology is a collection, $\tau$, of subsets of a set $X$ such that
+\begin{align*}
+    \emptyset, X &\in \tau \\
+    A, B \in \tau &\Rightarrow A \cap B \in \tau \\
+    \{U_i\}_{i \in I} \subseteq \tau &\Rightarrow \bigcup_{i \in I}U_i \in \tau
+\end{align*}
+where $I$ is a, possibly uncountable, index set. The pair $(X, \tau)$ is called a topological space. The sets $A\in \tau$ are called open sets. A topology is therefore a generalization of the notion of open sets on a space $X$.
+
+On $\R$ we have a standard $\sigma$-algebra, called the Borel $\sigma$-algebra, and denoted $\sa{B}(\R)=\sa{B}$, which is the $\sigma$-algebra generated by the open sets in $\R$, i.e. $\sa{B}(\R):=\sigma(\topo{O})$. Equivalently, for any topological space $(X, \tau)$ the Borel $\sigma$-algebra on that set $\sa{B}(X)$ is given by $\sa{B}(X):=\sigma(\tau)$. We will mostly be working with $\sa{B}(\R)$, indeed, from now on, if no $\sigma$-algebra as given on $\R$ we will by default assume the Borel $\sigma$-algebra.
+
+
+Let us look at some introductory results about $\sa{B}(\R)$:
+
+
+
+
+
+\end{document}

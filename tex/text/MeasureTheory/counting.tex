@@ -1,0 +1,90 @@
+\documentclass[../../textbook.tex]{subfiles}
+\begin{document}
+
+\section{Cardinality}
+
+Before we dive into measure theory, we will need a short introduction to the concept of counting and cardinality. % Something about: this can be read in another part (plus a reference) or continue here
+
+In measure theory we are interested in how big sets are, and the most elementary way we can assign a size to a set, is to just count how many elements are in the set. Of course, some set are infinitely big, but as it turns out, there are different kinds of infinities when it comes to sets.
+
+Cardinality is a measure of "how many elements are in the set", so for a set $A=\{1,2,3\}$ we see that it has 3 elements, and say that its cardinality is 3, and write $\card{A}=3$.
+
+So for a general finite set $A=\{x_1,x_2,\dots, x_n\}$ we see that $\card{A}=n$. The concept however is a little bit different for infinite sets, and things start to get a little bit weird.
+
+The natural numbers are infinite, but we will think of them as being countable, this is because, if we were to start counting (i.e. 1, 2, 3, etc.) we would eventually reach every element of the natural numbers (we will not see finite time as a hindrance). So we say that $\N$ is countably infinite, and write $\card{\N}=\aleph_0$ (aleph zero).
+
+For finite sets, it is easy to compare two sets, by just counting if they have the same number of elements. This procedure is just another way of seeing that there exists a bijection between the two sets. For example if we have two sets $A=\{x_1, \dots, x_n\}$, $B=\{y_1,\dots, y_m\}$ we can make the map $f:A \to B$ given by
+\begin{align*}
+    f(x_i)=y_i
+\end{align*}
+thus if $n=m$, this defines a bijection, and we will think of the two sets $A$ and $B$ as equally sized. If however $n<m$ this map is only an injection, and in fact no bijection exists, and when this happens, we say that $\card{A}<\card{B}$. Along the same line, if $n>m$, the map is only a surjection, and in fact no bijection exists, and when this happens, we say that $\card{A}>\card{B}$.
+
+So to compare the size of two sets, we will just see if there is a bijection between the two sets, in which case they are "of equal size", or, if no such bijection exists, we will see if we can find an injection or surjection.
+
+Immediately we see that for any finite set $A$, we have $\card{A}<\card{\N}$, and thus $A$ is called a (countable) finite set. Now let us see where things get a litte weird.
+
+Let $2\N:=\{2n | n \in \N\}$, then we can make the map $f:\N \to 2\N$ given by
+\begin{align*}
+    f(n)=2n.
+\end{align*}
+This is a bijection, and hence we see that $\card{\N}=\card{2\N}$, i.e. there are "as many" natural numbers as there are even numbers. This feels quite unintuitive, hence the use of the word "cardinality" rather than "size". Using a similar argument, we see that the natural numbers and the \emph{un-even} numbers have the same cardinality.
+
+Potentially we would also have to prove that the uneven and the even numbers have the same cardinality, but it is a well known result that if $A,B,C$ are three sets, and $f:A\to B$ and $g: B \to C$ are two bijections (respectively injections or surjections) then the composition $g\circ f$ is again a bijection (resp. injection or surjection). I.e. the relation of being the same cardinality is transitive.
+
+Let us look at some more examples.
+
+\begin{theorem}
+The natural numbers and the integers have the same cardinality, i.e. $\card{\N}=\card{\Z}$.
+\end{theorem}
+\begin{proof}
+We want to show that there is a bijection between the two sets. Our approach will be to make a map that does the following:
+\begin{align*}
+    1 &\to 0 \\
+    2 &\to 1 \\
+    3 &\to -1 \\
+    4 &\to 2 \\
+    5 &\to -2 \\
+    &\vdots
+\end{align*}
+We can define this map $f:\N\to \Z$ by
+\begin{align*}
+    f(n) = \begin{cases}
+    2n, \qquad &\text{if $n$ is even} \\
+    -\left( \frac{n-1}{2} \right), \qquad &\text{if $n$ is odd}
+    \end{cases}
+\end{align*}
+Indeed this is a bijection: For every $n \in \N$, $f(n)$ defines a whole number. Thus $f$ is well-defined. Furthermore if $n, m \in \N$ but $n \neq m$ then if $n$ and $m$ have different parity (one is even, the other is uneven) then one of $f(n),f(m)$ will be positive, while the other will be negative. If they have the same parity, then they must be separated by at least two, and thus $\left\lfloor \frac{n}{2} \right\rfloor \neq \left\lfloor \frac{m}{2} \right\rfloor$. Thus $f$ is an injection.
+
+To show that $f$ is a surjection, we see that it has an inverse, $f^{-1}:\Z \to \N$ given by
+\begin{align*}
+    f^{-1}(z)=\begin{cases}
+    2z, \qquad &\text{if $z$ is positive} \\
+    -2z+1, \qquad &\text{if $z$ is negative or 0}
+    \end{cases}
+\end{align*}
+It is quite easy to verify that this is an inverse. Thus for every $z\in \Z$ there exists an $n\in \N$ such that $f(n)=z$, namely $n=f^{-1}(z)$. Thus $f$ is a surjection, and since it is both a surjection and an injection, it is a bijection. Thus $\card{\N}=\card{\Z}$.
+\end{proof}
+
+\begin{theorem}
+$\card{\N}=\card{\Q}$.
+\end{theorem}
+\begin{proof}
+Let us take a look at the positive rational numbers, and align them in the following fashion:
+\begin{align*}
+    \begin{matrix}
+    \frac{1}{1} & \frac{2}{1} & \frac{3}{1} & \frac{4}{1} & \frac{5}{1} & \dots \\[0.5em]
+    \frac{1}{2} & \frac{2}{2} & \frac{3}{2} & \frac{4}{2} & \frac{5}{2} & \dots \\[0.5em]
+    \frac{1}{3} & \frac{2}{3} & \frac{3}{3} & \frac{4}{3} & \frac{5}{3} & \dots \\[0.5em]
+    \frac{1}{4} & \frac{2}{4} & \frac{3}{4} & \frac{4}{4} & \frac{5}{4} & \dots \\[0.5em]
+    \frac{1}{5} & \frac{2}{5} & \frac{3}{5} & \frac{4}{5} & \frac{5}{5} & \dots \\[0.5em]
+    \vdots      & \vdots      & \vdots      & \vdots      & \vdots      & \ddots
+    \end{matrix}
+\end{align*}
+
+
+\end{proof}
+
+
+
+
+\end{document}
