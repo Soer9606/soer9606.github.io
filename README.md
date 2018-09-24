@@ -1,14 +1,14 @@
 # The Textbook
 
-The Textbook is an attempt to make a free online textbook which is well written, and most importantly, correct.
+The Textbook is an attempt to make a free online textbook of high quality.
 
 The project is still in its early phase, and ideas like open-source (to heavily populate the textbook with theory), design (should the textbook work with MathJax, or be pre-compiled to .pdf), and many other things are flying around the room.
 
-Currently though, the focus is on filling the pages with knowledge, and the knowledge at the moment, is heavily focused on mathematics, as that is what I, the creator, am studying. I have started just writing the textbook in ordinaty tex, but this may change, and it may in fact be stupid to start like this, when I might have to change to MathJax, and the two formats aren't entirely compatible.
+Currently though, the focus is on filling the pages with knowledge, and the knowledge at the moment, is heavily focused on mathematics, as that is what I, the creator, am studying. I have started just writing the textbook in ordinary tex, but this may change, and it may in fact be stupid to start like this, when I might have to change to MathJax, and the two formats aren't entirely compatible.
 
 ## For collaborators
 
-We are currently working on making this a collaborative project. THis means getting an open source license, developing how the project should be developed, and some ground rules for developers.
+We are currently working on making this a collaborative project. This means getting an open source license, developing how the project should be developed, and some ground rules for developers.
 
 If you want to help write the textbook, there are some rules (or guidelines) to follow:
 1. Please, do not add more files. As we do not want the project to be crowded with half-finished small parts, and it is easier for us to proof-read small parts, we recommend that you work on or edit existing files. If you do however want to add new files etc. please ask the creator (Søren).
