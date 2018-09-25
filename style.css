@@ -3,6 +3,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.index {
+  background-color: #919191;
+}
+
 .container {
   padding: 30px;
 }
@@ -39,4 +43,9 @@ body {
 .navbar .active {
     background-color: #4CAF50;
     color: white;
+}
+
+.about {
+  margin-right: 150px;
+  margin-left: 80px;
 }
